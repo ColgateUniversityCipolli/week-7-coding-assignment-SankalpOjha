@@ -30,3 +30,11 @@ pois.prob <- function(x, size, prob, type="<="){
     return(p.gte)
   }
 }
+
+#Write a beta.prob() function that computes P(X = x), P(X ̸= x), P(X < x), P(X ≤ x),
+#P(X > x), and P(X ≥ x) for a beta distribution. Enable the user to specify the shape 
+#parameters α and β.
+
+beta.prob <- function(x, size, prob, type="<="){
+  # Use dbeta and pbeta to conditionally return the correct probability
+}
