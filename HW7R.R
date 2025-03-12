@@ -36,16 +36,18 @@ pois.prob <- function(x, lambda, type="<="){
 #parameters α and β.
 
 beta.prob <- function(x, alpha, beta, type="<="){
-  if (type == "="){
+  # Use dbeta and pbeta to conditionally return the correct probability
+  
+  if (type == "="){ #P(X = x)
     return(0) 
   }
-  else if (type == "!="){
+  else if (type == "!="){ #P(X != x)
     return(1)
   }
-  else if(type == "<" | type == "<="){
+  else if(type == "<" | type == "<="){ #P(X < x) or P(X <= x)
     return(pbeta(x, alpha, beta))
   }
-  else if (type == ">" | type == ">="){
+  else if (type == ">" | type == ">="){ #P(X > x) or P(X >= x)
     return(1 - pbeta(x, alpha, beta))
   }
 }

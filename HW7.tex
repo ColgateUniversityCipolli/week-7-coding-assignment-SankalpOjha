@@ -69,6 +69,8 @@
 % Question 1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Write a \texttt{pois.prob()} function that computes $P(X=x)$, $P(X \neq x)$, $P(X<x)$, $P(X \leq x)$, $P(X > x)$, and $P(X \geq x).$ Enable the user to specify the rate parameter $\lambda$.
+
+\textbf{Explanation:} Here is the code to calculate various probabilities for a Poisson distribution. I changed the \texttt{size} and \texttt{prob} parameters to \texttt{$\lambda$}. The function takes in a support \texttt{x} which is greater than or equal 0 and \texttt{$\lambda$} which is a value greater than or equal 0. The default \texttt{type} for the function is $\leq$.
 \begin{knitrout}\scriptsize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
@@ -101,8 +103,6 @@
     \hlkwd{return}\hldef{(p.gte)}
   \hldef{\}}
 \hldef{\}}
-
-\hlkwd{pois.prob}\hldef{(}\hlkwc{x} \hldef{=} \hlnum{1}\hldef{,} \hlkwc{lambda} \hldef{=} \hlnum{2}\hldef{,}\hlsng{"=="}\hldef{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -114,27 +114,27 @@ $P(X \neq x)$, $P(X<x)$, $P(X \leq x)$, $P(X > x)$, and $P(X \geq x)$
 for a beta distribution. Enable the user to specify the shape parameters
 $\alpha$ and $\beta$.
 
+\textbf{Explanation:} Here is the code to calculate various probabilities for a Beta distribution. I changed the \texttt{size} and \texttt{prob} parameters to \texttt{alpha} and \texttt{beta}. The function takes in a support \texttt{x} which is 0 $\leq$ \texttt{x} $\leq$ 1 and \texttt{alpha} and \texttt{beta} which are both values greater than or equal 0. The default \texttt{type} for the function is $\leq$. The output for $P(X=x)$ and $P(X \neq x)$ were hardcoded as 0 and 1, respectively. The $P(X<x)$ and $P(X \leq x)$ condition and the $P(X > x)$ and $P(X \geq x)$ condition were combined as the equal to becomes irrelevant when considering a continuous distribution.
+
 \begin{knitrout}\scriptsize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hldef{beta.prob} \hlkwb{<-} \hlkwa{function}\hldef{(}\hlkwc{x}\hldef{,} \hlkwc{alpha}\hldef{,} \hlkwc{beta}\hldef{,} \hlkwc{type}\hldef{=}\hlsng{"<="}\hldef{)\{}
   \hlcom{# Use dbeta and pbeta to conditionally return the correct probability}
 
-  \hlkwa{if} \hldef{(type} \hlopt{==} \hlsng{"="}\hldef{)\{}
+  \hlkwa{if} \hldef{(type} \hlopt{==} \hlsng{"="}\hldef{)\{} \hlcom{#P(X = x)}
     \hlkwd{return}\hldef{(}\hlnum{0}\hldef{)}
   \hldef{\}}
-  \hlkwa{else if} \hldef{(type} \hlopt{==} \hlsng{"!="}\hldef{)\{}
+  \hlkwa{else if} \hldef{(type} \hlopt{==} \hlsng{"!="}\hldef{)\{} \hlcom{#P(X != x)}
     \hlkwd{return}\hldef{(}\hlnum{1}\hldef{)}
   \hldef{\}}
-  \hlkwa{else if}\hldef{(type} \hlopt{==} \hlsng{"<"} \hlopt{|} \hldef{type} \hlopt{==} \hlsng{"<="}\hldef{)\{}
+  \hlkwa{else if}\hldef{(type} \hlopt{==} \hlsng{"<"} \hlopt{|} \hldef{type} \hlopt{==} \hlsng{"<="}\hldef{)\{} \hlcom{#P(X < x) or P(X <= x)}
     \hlkwd{return}\hldef{(}\hlkwd{pbeta}\hldef{(x, alpha, beta))}
   \hldef{\}}
-  \hlkwa{else if} \hldef{(type} \hlopt{==} \hlsng{">"} \hlopt{|} \hldef{type} \hlopt{==} \hlsng{">="}\hldef{)\{}
+  \hlkwa{else if} \hldef{(type} \hlopt{==} \hlsng{">"} \hlopt{|} \hldef{type} \hlopt{==} \hlsng{">="}\hldef{)\{} \hlcom{#P(X > x) or P(X >= x)}
     \hlkwd{return}\hldef{(}\hlnum{1} \hlopt{-} \hlkwd{pbeta}\hldef{(x, alpha, beta))}
   \hldef{\}}
 \hldef{\}}
-
-\hlkwd{beta.prob}\hldef{(}\hlkwc{x} \hldef{=} \hlnum{0.5}\hldef{,} \hlkwc{alpha} \hldef{=} \hlnum{5}\hldef{,} \hlkwc{beta} \hldef{=} \hlnum{5}\hldef{,} \hlsng{">="}\hldef{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
