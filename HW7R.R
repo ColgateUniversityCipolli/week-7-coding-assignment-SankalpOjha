@@ -1,7 +1,7 @@
 #Write a pois.prob() function that computes P(X = x), P(X ̸= x), P(X < x), P(X ≤ x),
 #P(X > x), and P (X ≥ x). Enable the user to specify the rate parameter λ.
 
-pois.prob <- function(x, size, prob, type="<="){
+pois.prob <- function(x, lambda, type="<="){
   # Use dpois and ppois to conditionally return the correct probability
   
   p.eq <- dpois(x, lambda)     # P(X = x)
@@ -35,6 +35,17 @@ pois.prob <- function(x, size, prob, type="<="){
 #P(X > x), and P(X ≥ x) for a beta distribution. Enable the user to specify the shape 
 #parameters α and β.
 
-beta.prob <- function(x, size, prob, type="<="){
-  # Use dbeta and pbeta to conditionally return the correct probability
+beta.prob <- function(x, alpha, beta, type="<="){
+  if (type == "="){
+    return(0) 
+  }
+  else if (type == "!="){
+    return(1)
+  }
+  else if(type == "<" | type == "<="){
+    return(pbeta(x, alpha, beta))
+  }
+  else if (type == ">" | type == ">="){
+    return(1 - pbeta(x, alpha, beta))
+  }
 }
